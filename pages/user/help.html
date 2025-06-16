@@ -22,16 +22,13 @@
             <h1 class="hero-title">需要帮助？</h1>
             <p class="hero-subtitle">我们的帮助中心提供了丰富的信息和常见问题解答，助您快速解决问题</p>
             <div class="category-tags">
-                <a href="javascript:;" class="category-tag">
-                    <i class="fas fa-credit-card"></i> 支付问题
-                </a>
-                <a href="javascript:;" class="category-tag">
+                <a href="javascript:;" class="category-tag" data-item="1-1">
                     <i class="fas fa-user-circle"></i> 账户管理
                 </a>
-                <a href="javascript:;" class="category-tag">
-                    <i class="fas fa-shield-alt"></i> 安全设置
+                <a href="javascript:;" class="category-tag" data-item="2-2">
+                    <i class="fas fa-credit-card"></i> 支付问题
                 </a>
-                <a href="javascript:;" class="category-tag">
+                <a href="javascript:;" class="category-tag" data-item="3-1">
                     <i class="fas fa-cog"></i> 功能使用
                 </a>
             </div>
@@ -100,9 +97,9 @@
                         <div class="card-icon">
                             <i class="fas fa-user-circle"></i>
                         </div>
-                        <h3 class="card-title">总体流程</h3>
+                        <h3 class="card-title">账户管理</h3>
                         <p class="card-description">了解如何注册、登录和管理您的账户信息。</p>
-                        <a href="javascript:;" class="card-link" data-category="1">
+                        <a href="javascript:;" class="card-link" data-item="1-1">
                             查看详情 <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
@@ -113,7 +110,7 @@
                         </div>
                         <h3 class="card-title">支付与账单</h3>
                         <p class="card-description">了解支付方式、账单查询和退款相关问题。</p>
-                        <a href="javascript:;" class="card-link" data-category="2">
+                        <a href="javascript:;" class="card-link" data-item="2-2">
                             查看详情 <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
@@ -124,7 +121,7 @@
                         </div>
                         <h3 class="card-title">功能使用</h3>
                         <p class="card-description">探索我们产品的各种功能和使用方法。</p>
-                        <a href="javascript:;" class="card-link" data-category="3">
+                        <a href="javascript:;" class="card-link" data-item="3-1">
                             查看详情 <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
@@ -1057,8 +1054,8 @@
 
             // 内容切换逻辑
             const contentItems = document.querySelectorAll('.content-item');
-            const categoryItems = document.querySelectorAll('.category-item');
-            const contentLinks = document.querySelectorAll('.card-link, .faq-list a');
+            const categoryItems = document.querySelectorAll('.category-items .category-item');
+            const contentLinks = document.querySelectorAll('.card-link, .category-tag');
 
             function showContent(contentId) {
                 // 隐藏所有内容
@@ -1081,6 +1078,23 @@
                 const activeItem = document.querySelector(`.category-item[data-item="${contentId}"]`);
                 if (activeItem) {
                     activeItem.classList.add('active');
+
+                    // 展开当前菜单项所在的分类
+                    const categoryId = contentId.split('-')[0];
+                    const categoryTitle = document.querySelector(`.category-title[data-category="${categoryId}"]`);
+                    if (categoryTitle) {
+                        // 收起其他分类组
+                        categoryTitles.forEach(title => {
+                            if (title !== categoryTitle) {
+                                title.nextElementSibling.classList.remove('show');
+                                title.classList.remove('rotate');
+                            }
+                        });
+
+                        // 展开当前分类组
+                        categoryTitle.nextElementSibling.classList.add('show');
+                        categoryTitle.classList.add('rotate');
+                    }
                 }
             }
 

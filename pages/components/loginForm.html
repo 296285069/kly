@@ -115,6 +115,9 @@
                 var index = parent.layer.getFrameIndex(window.name);
                 parent.layer.close(index);
 
+                // 如果使用token认证，本地存储token
+                // localStorage.setItem('token', tokenContent);
+
                 // 登录成功 跳转后台首页
                 parent.window.location.href = '/pages/admin/home.html';
             } else {
