@@ -1,0 +1,70 @@
+<!-- 固定底部 -->
+<style>
+    .page-footer {
+        width: 100%;
+        background-color: #ebf5fa;
+        padding: 40px 15px;
+    }
+
+    .more {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+    }
+
+    .more span,
+    .more a {
+        color: #819199;
+    }
+
+    .more-info {
+        width: calc(100% - 60px);
+        padding-left: 5%;
+    }
+
+    .more-info>div span:not(:first-child) {
+        margin-left: 24px;
+    }
+
+    .more-info div:nth-child(1) {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .more-info div:nth-child(2) {
+        margin-top: 10px;
+    }
+</style>
+
+<div class="page-footer">
+    <div class="more">
+        <img style="width: 60px;" src="/assets/images/logoEn.png" alt="">
+        <div class="more-info">
+            <div>
+                <a href="javascript:;">关于我们</a>
+                <a href="javascript:;">商务合作</a>
+                <a href="javascript:;">服务条款</a>
+                <a href="javascript:;">隐私政策</a>
+            </div>
+            <div>
+                <span>重庆凯领域信息科技有限公司</span>
+                <span><a href="https://beian.miit.gov.cn/" target="_blank">
+                        <img class="secure-img"
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAACr0lEQVQ4T12Sa0hTcRjGf/9znMezuanbctqNyEqLoiICIaMMouhDVysIKyG7SVGZXbCgyIJFRX6IJIOCsgiCsHvQlegiUYpgUqlZKt3MWVs7x23n7ERSEb3fHnh+PC88j+C/s0A82jNwyDN53PSobPeMNF8/WNTV3CSqif1rFf+Kph2O8X5RUpY/5m32lPRWKcGMUa9lcaF+Qndh+pWTC7c0Xvrj/ws+LvONPWUu9udN7spY+eI21h0NhlqQpNJUlMOWe0siGzwXjixoaLwsLmL2g4HFpBQPLr/1XB9la8vfCqU9SHaIS0AIpBUOFtp30RlI5XF2SYG6nneiZSOKNy/1wNInpdM1ofIwfRtmOZD5+6mPIC1LpDRvHY9ejeL21PK25pvBYvGmgtEOp3TWH1rFmdaZvJ9ThPO0hlSigtMiXmUiChzkPttPpu0zVb79hDSrULw/JG3G6yqsC+awtG4Pu7LOUaHUgCZBigQxG9e8ucx9uB1/zjGWZdVhdfReF21+Ntm8ycvxOJl0/Qi54VZqOI46TkbOlNAfxDmszeSofQ4N88uw9XTT90k/L1oOUjBgCDvDYZUbRj6bnq4hAZPxzhYmut9xqn02P+JJVIyopsh3FWdajFCQShGoZa0ZYHVUl0gc7qMrlko8EiE7+QNWTNCoDaPji5tpGW0YH7+g2uMYLirF/b0kZA9ib7SbWbriEi63IGO4hWREQVEwoiE6XsiE+2ykKZqR4KbmRDHH+3tsP+2erSSJnTafkqx16tg9Mg4HSJEgQV1FDwrUQSpGIBJOUqxq97zec/3gj1pmCcHur69RvwdtJP5qIktBcct0P48S6zPwpMVwDSUc0dnnLeTu38m9rcRnT2WG+Y0czyR3it4esuREKyp7nUZPQ29PXOVV50ueTq2i91fYT2tlCNdvaC2mAAAAAElFTkSuQmCC" />
+                        渝ICP备2025055648号-1
+                    </a></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 组件初始化逻辑
+    layui.use(['element', 'util'], function () {
+        var element = layui.element;
+        var util = layui.util;
+
+        element.init();
+    });
+</script>

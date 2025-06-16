@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>服务流程</title>
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/assets/images/logoEn.png" type="image/png">
+    <link href="/assets/css/layui.css" rel="stylesheet" />
+    <link href="/assets/css/common.css" rel="stylesheet" />
+    <link href="/assets/css/service.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="header-container"></div>
+
+    <!-- 主体内容 -->
+    <div class="page-main">
+        <div class="banner">
+            <img src="/assets/images/home/banner03.png" alt="">
+        </div>
+        <div class="item">
+            <div>基础流程</div>
+            <div>沟通合作 → 账户注册 → 接入测试 → SDK上线 → 优化运营 → 收益结算</div>
+        </div>
+        <div class="item">
+            <div>沟通合作</div>
+            <div>与商务进行充分，了解需求后，制定合作方案并签订合同</div>
+        </div>
+        <div class="item">
+            <div>账户注册</div>
+            <div>注册地址：http://www.kailingyu.com，点击【注册】按钮，填写相关资料</div>
+        </div>
+        <div class="item">
+            <div>接入测试</div>
+            <div>提供技术支持，帮助开发者完成SDK对接</div>
+        </div>
+        <div class="item">
+            <div>SDK上线</div>
+            <div>测试正常后，即可正式上线</div>
+        </div>
+        <div class="item">
+            <div>优化运营</div>
+            <div>实时监控数据，并持续优化策略，提升变现</div>
+        </div>
+        <div class="item">
+            <div>收益结算</div>
+            <div>双方进行账单核对，确认无误后结算收益</div>
+        </div>
+    </div>
+
+    <div id="footer-container"></div>
+
+    <script src="/assets/js/components.js"></script>
+    <script src="/assets/js/layui.js"></script>
+    <script>
+        ComponentLoader.load('#header-container', '/pages/components/header.html').then(() => {
+            window.dispatchEvent(new CustomEvent('header-init', {
+                detail: { username: 'header入参' }
+            }));
+        });
+        ComponentLoader.load('#footer-container', '/pages/components/footer.html');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>广告形态</title>
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/assets/images/logoEn.png" type="image/png">
+    <link href="/assets/css/layui.css" rel="stylesheet" />
+    <link href="/assets/css/common.css" rel="stylesheet" />
+    <link href="/assets/css/animate.min.css" rel="stylesheet">
+    <link href="/assets/css/swiper.min.css" rel="stylesheet">
+    <link href="/assets/css/advertisingForm.css" rel="stylesheet" />
+    <style>
+        .shadow {
+            display: block !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header-container"></div>
+
+    <!-- 主体内容 -->
+    <div class="page-main">
+        <div class="banner">
+            <div class="banner-info">
+                <div>基础变现：业内领先的产品形态，充分适配各类变现场景</div>
+                <div>打造App全场景变现能力，并持续构筑安全、高效、健康的生态环境，为开发者的商业成长提供坚实基础</div>
+                <div class="line-btn" style="justify-content: center;">
+                    <div class="cancel-btn" onclick="window.dispatchEvent(new CustomEvent('header-login'))">
+                        立即体验
+                    </div>
+                </div>
+            </div>
+            <div class="tabs">
+                <div class="tabs-left">
+                    <!-- 左侧内容将动态显示在这里 -->
+                </div>
+                <div class="tabs-right">
+                    <!-- 右侧内容将动态显示在这里 -->
+                </div>
+            </div>
+        </div>
+        <div class="swiper-container animated">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="background-image:url(/assets/images/advertisingForm/s1.jpg)">
+                    <div class="shadow"><span class="animated zoomIn" style="display:block;">在线视频</span></div>
+                </div>
+                <div class="swiper-slide" style="background-image:url(/assets/images/advertisingForm/s2.jpg)">
+                    <div class="shadow"><span class="animated zoomIn" style="display:block;">短视频</span></div>
+                </div>
+                <div class="swiper-slide" style="background-image:url(/assets/images/advertisingForm/s3.png)">
+                    <div class="shadow"><span class="animated zoomIn" style="display:block;">图像</span></div>
+                </div>
+                <div class="swiper-slide" style="background-image:url(/assets/images/advertisingForm/s4.jpg)">
+                    <div class="shadow"><span class="animated zoomIn" style="display:block;">直播</span></div>
+                </div>
+                <div class="swiper-slide" style="background-image:url(/assets/images/advertisingForm/s5.png)">
+                    <div class="shadow"><span class="animated zoomIn" style="display:block;">聚合视频</span></div>
+                </div>
+                <div class="swiper-slide" style="background-image:url(/assets/images/advertisingForm/s6.jpg)">
+                    <div class="shadow"><span class="animated zoomIn" style="display:block;">开屏</span></div>
+                </div>
+                <div class="swiper-slide" style="background-image:url(/assets/images/advertisingForm/s7.jpg)">
+                    <div class="shadow"><span class="animated zoomIn" style="display:block;">天气</span></div>
+                </div>
+                <div class="swiper-slide" style="background-image:url(/assets/images/advertisingForm/s8.jpg)">
+                    <div class="shadow"><span class="animated zoomIn" style="display:block;">游戏</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-container"></div>
+
+    <script id="tabs-left-item" type="text/html">
+        {{# layui.each(d, function(index, item){ }}
+            <div class="tabs-left-item" id="tab-{{ item.id }}">
+                <img src="{{ item.src }}" alt="{{ item.title }}">
+                <div>{{ item.title }}</div>
+            </div>
+        {{# }); }}
+    </script>
+
+    <script id="tabs-right-content" type="text/html">
+        <div class="tabs-right-content">
+            <div class="tabs-right-content-phone">
+                <img src="{{ d.srcContent }}" alt="{{ d.title }}">
+            </div>
+            <div class="tabs-right-content-info">
+                <div>{{ d.title }}</div>
+                <div>{{ d.info1 }}</div>
+                <div>{{ d.info2 }}</div>
+            </div>
+        </div>
+    </script>
+
+    <script src="/assets/js/components.js"></script>
+    <script src="/assets/js/layui.js"></script>
+    <script src="/assets/js/swiper.min.js"></script>
+    <script>
+        ComponentLoader.load('#header-container', '/pages/components/header.html').then(() => {
+            window.dispatchEvent(new CustomEvent('header-init', {
+                detail: { username: 'header入参' }
+            }));
+        });
+        ComponentLoader.load('#footer-container', '/pages/components/footer.html');
+
+        //JS
+        layui.use(["element", "layer", "util"], function () {
+            var element = layui.element;
+            var layer = layui.layer;
+            var util = layui.util;
+            var $ = layui.$;
+            var laytpl = layui.laytpl;
+
+            const tabsList = [
+                {
+                    id: '101',
+                    title: '开屏广告',
+                    src: '/assets/images/advertisingForm/tail_ad_gray.png',
+                    srcActive: '/assets/images/advertisingForm/tail_ad.png',
+                    srcContent: '/assets/images/advertisingForm/01.gif',
+                    info1: '应用开屏黄金展示位，头部品牌广告主青睐样式，广告填充率、点击率更高。',
+                    info2: '常见场景：所有应用的启动页',
+                },
+                {
+                    id: '102',
+                    title: '插屏广告',
+                    src: '/assets/images/advertisingForm/plaque_ad_gray.png',
+                    srcActive: '/assets/images/advertisingForm/plaque_ad.png',
+                    srcContent: '/assets/images/advertisingForm/02.gif',
+                    info1: '用户主动参与观看并获得奖励的视频广告形式，完成率高，收益稳定。',
+                    info2: '常见场景：游戏内奖励关卡、内容解锁、获取道具等',
+                },
+                {
+                    id: '103',
+                    title: '激励广告',
+                    src: '/assets/images/advertisingForm/incentive_ad_gray.png',
+                    srcActive: '/assets/images/advertisingForm/incentive_ad.png',
+                    srcContent: '/assets/images/advertisingForm/06.gif',
+                    info1: '与应用内容高度融合的广告形式，用户体验好，点击率高，转化效果优异。',
+                    info2: '常见场景：资讯类APP、社交媒体、内容平台等',
+                },
+                {
+                    id: '104',
+                    title: '信息流广告',
+                    src: '/assets/images/advertisingForm/news_ad_gray.png',
+                    srcActive: '/assets/images/advertisingForm/news_ad.png',
+                    srcContent: '/assets/images/advertisingForm/04.gif',
+                    info1: '在应用场景切换时展示的全屏广告，视觉冲击力强，适合品牌曝光和下载类广告。',
+                    info2: '常见场景：游戏关卡切换、内容加载完成等',
+                },
+                {
+                    id: '105',
+                    title: '横幅广告',
+                    src: '/assets/images/advertisingForm/banner_ad_gray.png',
+                    srcActive: '/assets/images/advertisingForm/banner_ad.png',
+                    srcContent: '/assets/images/advertisingForm/03.gif',
+                    info1: '轻量级广告形式，不影响用户主流程，适合中小尺寸展示位置，填充率高。',
+                    info2: '常见场景：应用底部、顶部、内容间隙等',
+                },
+            ];
+
+            // 创建一个ID到数据的映射
+            const tabDataMap = {};
+            tabsList.forEach(item => {
+                tabDataMap[`tab-${item.id}`] = item;
+            });
+
+            // 渲染左侧选项卡
+            var leftTemplate = $('#tabs-left-item').html();
+            var $leftTarget = $('.tabs-left');
+
+            laytpl(leftTemplate).render(tabsList, function (html) {
+                $leftTarget.html(html);
+
+                // 使用事件委托绑定鼠标进入事件
+                $('.tabs-left').on('mouseenter', '.tabs-left-item', function () {
+                    var $this = $(this);
+                    var tabId = $this.attr('id');
+                    var itemData = tabDataMap[tabId];
+
+                    if (!itemData) return;
+
+                    // 恢复其他选项卡的初始状态
+                    $('.tabs-left-item').each(function () {
+                        if (this !== $this[0]) {
+                            var otherId = $(this).attr('id');
+                            var otherData = tabDataMap[otherId];
+                            if (otherData) {
+                                $(this).find('img').attr('src', otherData.src);
+                            }
+                            $(this).removeClass('tabs-left-item-selected');
+                        }
+                    });
+
+                    // 显示当前高亮图片并添加选中样式
+                    $this.find('img').attr('src', itemData.srcActive);
+                    $this.addClass('tabs-left-item-selected');
+
+                    // 渲染右侧内容
+                    var rightTemplate = $('#tabs-right-content').html();
+                    var $rightTarget = $('.tabs-right');
+
+                    laytpl(rightTemplate).render(itemData, function (rightHtml) {
+                        $rightTarget.html(rightHtml);
+                    });
+                });
+
+                $(document).ready(function () {
+                    $('.tabs-left-item:first').trigger('mouseenter');
+                });
+            });
+
+            var swiper = new Swiper('.swiper-container', {
+                effect: 'coverflow',
+                grabCursor: true,
+                centeredSlides: true,
+                slidesPerView: 'auto',
+                loop: false,
+                initialSlide: 4, // 默认聚焦索引
+                coverflowEffect: {
+                    rotate: 50,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: true,
+                },
+            });
+            // 添加点击事件
+            document.querySelectorAll('.swiper-slide').forEach((slide, index) => {
+                slide.addEventListener('click', function () {
+                    // 计算实际索引（考虑循环模式）
+                    let realIndex = index;
+                    if (swiper.params.loop) {
+                        realIndex = parseInt(slide.getAttribute('data-swiper-slide-index'));
+                    }
+                    // 聚焦到点击的卡片
+                    swiper.slideTo(realIndex, 500);
+
+                });
+            });
+            // $(".swiper-slide").mouseenter(function () {
+            //     $(this).find(".shadow").fadeIn()
+            // }).mouseleave(function () {
+            //     $(this).find(".shadow").fadeOut()
+            // })
+        });
+    </script>
+</body>
+
+</html>

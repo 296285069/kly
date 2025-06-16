@@ -1,0 +1,107 @@
+<!-- components/header.html -->
+<style>
+    .page-header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        min-width: 700px;
+        z-index: 1000;
+        background-color: #fff !important;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .logo {
+        min-width: 83px;
+        height: 32px;
+        margin: 0 32px;
+    }
+
+    .layui-nav-item {
+        box-shadow: none;
+    }
+
+    .layui-nav {
+        padding: 0;
+    }
+
+    .layui-nav .layui-this:after,
+    .layui-nav-bar {
+        background-color: #409eff;
+    }
+
+    .layui-nav.layui-bg-gray .layui-this a {
+        color: #409eff;
+    }
+
+    .nav-login {
+        float: right;
+        cursor: pointer;
+        line-height: 60px;
+        padding: 0 30px;
+    }
+
+    .nav-login:hover {
+        color: #409eff;
+    }
+</style>
+<ul class="layui-nav layui-bg-gray page-header">
+    <img class="logo" src="/assets/images/logo.png" alt="">
+    <li class="layui-nav-item"><a href="/index.html">首页</a></li>
+    <li class="layui-nav-item"><a href="/pages/user/advertisingForm.html">广告形态</a></li>
+    <li class="layui-nav-item"><a href="/pages/user/service.html">服务流程</a></li>
+    <li class="layui-nav-item"><a href="/pages/user/contact.html">联系我们</a></li>
+    <li class="layui-nav-item"><a href="/pages/user/help.html">帮助中心</a></li>
+    <div class="nav-login" lay-on="nav-login">
+        登录
+    </div>
+</ul>
+
+<script>
+    // 组件初始化逻辑
+    layui.use(['element', 'util'], function () {
+        var element = layui.element;
+        var util = layui.util;
+        // 获取当前页面路径
+        var currentPath = window.location.pathname.split('/').pop();
+        // 遍历导航项进行匹配
+        var navItems = document.querySelectorAll('.layui-nav-item a');
+        navItems.forEach(function (item) {
+            var href = item.getAttribute('href').split('/').pop();
+            if (currentPath === href) {
+                item.parentElement.classList.add('layui-this');
+            }
+        });
+
+        util.on('lay-on', {
+            'nav-login': function () {
+                layer.open({
+                    title: '登录引力广告',
+                    type: 2,
+                    content: '/pages/components/loginForm.html',
+                    area: ['360px', '360px'], // 宽高
+                    resize: false, // 右下角拉伸尺寸
+                    move: false, // 拖拽
+                });
+            },
+        });
+
+
+        element.init(); // 重新渲染导航
+    });
+    window.addEventListener('header-init', function (e) {
+        var data = e.detail;
+        console.log('data', data);
+    });
+    window.addEventListener('header-login', function (e) {
+        // 获取登录按钮元素（根据类名定位）
+        const loginButton = document.querySelector('.nav-login');
+
+        // 检查元素是否存在
+        if (loginButton) {
+            // 模拟点击事件
+            loginButton.click();
+        } else {
+            console.warn('未找到登录按钮元素');
+        }
+    });
+</script>

@@ -1,0 +1,247 @@
+<link rel="stylesheet" href="/assets/css/layui.css">
+<link rel="stylesheet" href="/assets/css/common.css">
+<style>
+    body {
+        background-color: #fff;
+    }
+
+    .layui-form {
+        margin: 15px;
+    }
+
+
+    .layui-form-item {
+        margin-bottom: 10px;
+    }
+</style>
+<div>
+    <form class="layui-form layui-row layui-form-pane layui-col-space16" autocomplete="off" action="">
+        <div class="form-title">
+            1.选择应用平台和商店
+        </div>
+        <div class="layui-col-md4">
+            <div class="layui-form-item">
+                <label class="layui-form-label">应用平台</label>
+                <div class="layui-input-block">
+                    <select name="field1" lay-verify="required">
+                        <option value="">请选择</option>
+                        <option value="1">Android</option>
+                        <option value="2">Ios</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md4">
+            <div class="layui-form-item">
+                <label class="layui-form-label">应用商店</label>
+                <div class="layui-input-block">
+                    <select name="field2" lay-verify="required">
+                        <option value="">请选择</option>
+                        <option value="1">商店1</option>
+                        <option value="2">商店2</option>
+                        <option value="3">商店3</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md4">
+            <div class="layui-form-item">
+                <label class="layui-form-label">详细地址</label>
+                <div class="layui-input-block">
+                    <input type="text" name="url" placeholder="请输入" class="layui-input" lay-verify="required">
+                </div>
+            </div>
+        </div>
+        <div class="form-title">
+            2.输入媒体名称(与应用市场的媒体名称一致)
+        </div>
+        <div class="layui-col-md12">
+            <div class="layui-form-item">
+                <label class="layui-form-label">媒体名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="name" placeholder="请输入" class="layui-input" lay-verify="required">
+                </div>
+            </div>
+        </div>
+        <div class="form-title">
+            3.选择媒体类型
+        </div>
+        <div class="layui-col-md4">
+            <div class="layui-form-item">
+                <label class="layui-form-label">行业</label>
+                <div class="layui-input-block">
+                    <select name="cate_one" lay-filter="industry" lay-search lay-verify="required">
+                        <option value="">请选择</option>
+                        <option value="1">游戏</option>
+                        <option value="2">生活服务</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md4">
+            <div class="layui-form-item">
+                <label class="layui-form-label">类型</label>
+                <div class="layui-input-block">
+                    <select name="cate_two" lay-search lay-verify="required">
+                        <option value="">请先选择行业</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-title">
+            4.选择接入方式
+        </div>
+        <div class="layui-col-md12">
+            <div class="layui-form-item">
+                <input type="radio" name="sdk" value="sdk" title="SDK" checked>
+            </div>
+        </div>
+        <div class="form-title">
+            5.请输入包名
+        </div>
+        <div class="layui-col-md12">
+            <div class="layui-form-item">
+                <label class="layui-form-label">包名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="package" placeholder="请输入" class="layui-input" lay-verify="required">
+                </div>
+            </div>
+        </div>
+        <div class="form-title">
+            6.输入关键词和简介
+        </div>
+        <div class="layui-col-md12">
+            <div class="layui-form-item">
+                <label class="layui-form-label">关键词</label>
+                <div class="layui-input-block">
+                    <input type="text" name="keywords" placeholder="请输入" class="layui-input" lay-verify="required">
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md12">
+            <div class="layui-form-item">
+                <label class="layui-form-label">简介</label>
+                <div class="layui-input-block">
+                    <textarea name="remarks" placeholder="(40字以上)精准详细的简介能提升广告匹配度和收益" class="layui-textarea"
+                        lay-verify="required|minLength"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md12 line-btn">
+            <div lay-submit lay-filter="submit" class="confirm-btn">提交</div>
+            <div id="close" class="cancel-btn">返回</div>
+        </div>
+    </form>
+</div>
+
+<script src="/assets/js/layui.js"></script>
+<script>
+    // 组件初始化逻辑
+    layui.use(function () {
+        var layout = layui.layout;
+        var $ = layui.$;
+        var form = layui.form;
+        // 配置全局提示位置到顶部
+        layer.config({
+            offset: '20px'
+        });
+        // 定义行业类型映射
+        var typeMap = {
+            '1': [  // 游戏行业
+                { id: '101', name: '角色扮演' },
+                { id: '102', name: '策略游戏' }
+            ],
+            '2': [  // 生活服务行业
+                { id: '201', name: '餐饮服务' },
+                { id: '202', name: '生活购物' }
+            ]
+        };
+        // 监听行业选择变化
+        form.on('select(industry)', function (data) {
+            var industryValue = data.value;
+            var $typeSelect = $('select[name="cate_two"]');
+
+            // 清空现有选项
+            if (industryValue) {
+                $typeSelect.html('<option value="">请选择类型</option>');
+            } else {
+                $typeSelect.html('<option value="">请先选择行业</option>');
+            }
+
+            // 填充新选项
+            if (industryValue && typeMap[industryValue]) {
+                typeMap[industryValue].forEach(function (item) {
+                    $typeSelect.append(
+                        $('<option>').val(item.id).text(item.name)
+                    );
+                });
+            }
+
+            // 重新渲染下拉框
+            form.render('select');
+        });
+
+        // 自定义验证规则
+        form.verify({
+            minLength: function (value, elem) {
+                const minLen = 40;
+                const realValue = value.trim();
+
+                if (realValue.length < minLen) {
+                    return '简介需要至少' + minLen + '个字符（当前：' + realValue.length + '字）';
+                }
+            }
+        });
+
+        // 表单提交
+        form.on('submit(submit)', function (data) {
+            var field = data.field;
+            console.log('ok', field)
+
+
+
+            // 显示加载层
+            var loadIndex = layer.load(1, {
+                shade: [0.3, '#000'], // 带30%透明度的黑色遮罩
+                time: 0, // 不自动关闭
+                offset: '130px'
+            });
+
+            // 模拟异步提交（实际使用时替换为ajax请求）
+            setTimeout(function () {
+                // 请求成功
+
+                // 关闭加载层
+                layer.close(loadIndex);
+
+
+                // 向父组件传递消息更新列表
+                window.parent.postMessage({
+                    type: 'callback',
+                    data: { code: 0, name: '提交成功' }
+                }, '*');
+
+                // 关闭弹窗
+                closePop();
+            }, 2000);
+
+            return false;
+        });
+
+        window.addEventListener('message', function (event) {
+            if (event.data.type === 'initData') {
+                const data = event.data.data;
+                console.log('组件接收的数据:', data);
+            }
+        });
+
+        $('#close').on('click', function () {
+            closePop();
+        });
+        // 关闭弹窗
+        function closePop() {
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+        }
+    });
+</script>

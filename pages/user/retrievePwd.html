@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>重置密码</title>
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/assets/images/logoEn.png" type="image/png">
+    <link href="/assets/css/layui.css" rel="stylesheet" />
+    <link href="/assets/css/common.css" rel="stylesheet" />
+    <link href="/assets/css/register.css" rel="stylesheet" />
+    <link href="/assets/css/step.css" rel="stylesheet">
+    <style>
+        .layui-carousel {
+            padding-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header-container"></div>
+
+    <!-- 主体内容 -->
+    <div class="register-main">
+        <div class="layui-carousel" id="stepForm" lay-filter="stepForm">
+            <div carousel-item>
+                <div>
+                    <form class="layui-form" autocomplete="off">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">注册邮箱</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="email" lay-verify="required|email" placeholder="请输入注册邮箱"
+                                    class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">验证码</label>
+                            <div class="layui-input-block">
+                                <div class="captcha-input-group">
+                                    <input type="text" name="captcha" lay-verify="required|captcha"
+                                        placeholder="请输入右侧验证码" class="layui-input captcha-input" maxlength="4">
+                                    <div class="captcha-img-container">
+                                        <div class="captcha-img" id="captchaImg">
+                                            <canvas id="captchaCanvas" width="120" height="45"></canvas>
+                                        </div>
+                                        <span class="refresh-link" id="refreshCaptcha">看不清，换一张</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="login-btn" lay-submit lay-filter="submit-step1">
+                            下一步
+                        </div>
+                    </form>
+                </div>
+                <div>
+                    <form class="layui-form">
+                        <div style="margin-left: 110px;text-align: center;margin-bottom: 30px;">
+                            <div id="email">
+                            </div>
+                            <div>
+                                请点击邮件中的链接完成注册!
+                            </div>
+                        </div>
+                        <div class="login-btn" lay-submit lay-filter="submit-step2">
+                            去邮箱接收邮件
+                        </div>
+                    </form>
+                </div>
+                <div>
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">密码</label>
+                            <div class="layui-input-block">
+                                <input type="password" id="password" name="password" lay-verify="password"
+                                    placeholder="请输入6-16位密码" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label password-strength-label">密码强度</label>
+                            <div class="layui-input-block password-strength">
+                                <div class="weak">弱</div>
+                                <div class="medium">中</div>
+                                <div class="strong">强</div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">确认密码</label>
+                            <div class="layui-input-block">
+                                <input type="password" name="confirmPassword" placeholder="请再次输入密码" class="layui-input"
+                                    lay-verify="confirmPassword">
+                            </div>
+                        </div>
+                        <div class="login-btn" lay-submit lay-filter="submit-step3">
+                            下一步
+                        </div>
+                    </form>
+                </div>
+                <div>
+                    <form class="layui-form">
+                        <div style="text-align: center;margin: 90px 0 30px 110px;">
+                            <i class="layui-icon layui-circle"
+                                style="color: white;font-size:30px;font-weight:bold;background: #52C41A;padding: 20px;line-height: 80px;">&#xe605;</i>
+                            <div style="font-size: 24px;color: #333;font-weight: 500;margin-top: 30px;">
+                                修改成功
+                            </div>
+                        </div>
+                        <div class="login-btn" lay-submit lay-filter="submit-step4">
+                            前往登录
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="footer-container"></div>
+
+    <script src="/assets/js/components.js"></script>
+    <script src="/assets/js/layui.js"></script>
+    <script src="/assets/js/step.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script>
+        ComponentLoader.load('#header-container', '/pages/components/header.html').then(() => {
+            window.dispatchEvent(new CustomEvent('header-init', {
+                detail: { username: 'header入参' }
+            }));
+        });
+        ComponentLoader.load('#footer-container', '/pages/components/footer.html');
+
+        //JS
+        layui.config({
+            base: './step-lay/'
+        }).use(['form', 'step'], function () {
+            var $ = layui.$
+                , form = layui.form
+                , step = layui.step;
+            // 配置全局提示位置到顶部
+            layer.config({
+                offset: '20px'
+            });
+
+            // 解析URL中的step参数
+            const startIndex = getUrlParam("step");
+            const stepItems = [{
+                title: '确认账号'
+            }, {
+                title: '安全验证'
+            }, {
+                title: '重置密码'
+            }, {
+                title: '完成'
+            }];
+            // 校验参数有效性
+            const maxStep = stepItems.length - 1;
+            const validStartIndex = Math.max(0, Math.min(startIndex, maxStep));
+
+            step.render({
+                elem: '#stepForm',
+                filter: 'stepForm',
+                width: '100%',
+                stepWidth: '100%',
+                height: '320px',
+                startIndex: validStartIndex, // 传入校验后的起始索引
+                stepItems: stepItems
+            });
+            if (validStartIndex == 1) {
+                // 设置邮箱
+                $('#email').html(`我们已向您的邮箱${getUrlParam("email")}发送了一封激活邮件`);
+            }
+
+            // 自定义验证规则
+            form.verify({
+                // 验证密码，且为必填项
+                password: function (value, elem) {
+                    if (!/^[\S]{6,16}$/.test(value)) {
+                        return '密码必须为 6 到 16 位的非空字符';
+                    }
+                },
+                confirmPassword: function (value, elem) {
+                    if (value !== $password.val()) {
+                        return '两次输入的密码不一致';
+                    }
+                },
+                // 验证码验证
+                captcha: function (value) {
+                    if (value.toLowerCase() !== currentCaptcha.toLowerCase()) {
+                        refreshCaptcha(); // 验证失败时刷新验证码
+                        return '验证码输入错误，请重新输入';
+                    }
+                }
+            });
+
+            // 上一步
+            // step.pre('#stepForm');
+            // 下一步
+            // step.next('#stepForm');
+
+            form.on('submit(submit-step1)', function (data) {
+                var field = data.field;
+                console.log('field', field);
+                // 更新url参数
+                updateUrlParam("email", field.email);
+                // 更新html
+                $('#email').html(`我们已向您的邮箱${getUrlParam("email")}发送了一封激活邮件`);
+
+                // 下一步
+                step.next('#stepForm');
+                return false;
+            });
+
+            form.on('submit(submit-step2)', function (data) {
+                // 打开邮箱
+                openEmailLogin(getUrlParam("email"));
+
+                // 下一步
+                // step.next('#stepForm');
+                return false;
+            });
+
+            form.on('submit(submit-step3)', function (data) {
+                var field = data.field;
+                console.log('field', field);
+
+                // 下一步
+                step.next('#stepForm');
+                return false;
+            });
+
+            form.on('submit(submit-step4)', function (data) {
+                window.dispatchEvent(new CustomEvent('header-login'));
+                return false;
+            });
+
+            // 图形验证码功能
+            var currentCaptcha = ''; // 存储当前验证码
+            function refreshCaptcha() {
+                currentCaptcha = generateCaptcha('captchaCanvas');
+            }
+            // 初始化验证码
+            refreshCaptcha();
+
+            // 点击刷新验证码
+            $('#captchaImg, #refreshCaptcha').on('click', function () {
+                refreshCaptcha();
+            });
+
+            // 获取密码强度元素
+            var $strengthElements = $('.password-strength > div');
+            // 获取密码和确认密码输入框
+            var $password = $('#password');
+            // 监听密码输入
+            $password.on('input', function () {
+                var password = $(this).val();
+                checkPasswordStrength(password, $strengthElements);
+            });
+
+        });
+    </script>
+</body>
+
+</html>

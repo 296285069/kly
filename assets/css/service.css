@@ -1,0 +1,35 @@
+.page-main {
+  background-color: #fff;
+}
+.banner {
+  background-color: #3167ff;
+  text-align: center;
+}
+
+.item,
+.icon-item {
+  padding: 30px 0;
+  margin: 0 auto;
+  max-width: 1060px;
+}
+.item:not(:last-child) {
+  border-bottom: 1px #e0e0e0 solid;
+}
+.item > div:first-child {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+.item > div:not(:first-child),
+.icon-item > div > div:nth-child(1) {
+  font-size: 16px;
+  line-height: 32px;
+}
+
+.icon-item {
+  display: flex;
+  align-items: center;
+}
+.icon-item > div {
+  margin-left: 20px;
+}

@@ -1,0 +1,136 @@
+.page-main {
+  background-color: #fff;
+}
+.banner {
+  position: relative;
+  z-index: 1;
+}
+
+.banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-height: 504px;
+  background: url("/assets/images/home/productBanner.5310bbd9.png") no-repeat;
+  background-size: 100% 100%;
+  z-index: -1;
+}
+
+.banner-info {
+  margin: 0 auto;
+  padding-top: 80px;
+  width: 900px;
+  text-align: center;
+}
+
+.tabs {
+  width: 1200px;
+  margin: 80px auto;
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.08);
+  border-radius: 2px;
+  background-color: #fff;
+  display: flex;
+}
+.tabs-left {
+  width: 260px;
+  background: #fafafa;
+}
+.tabs-left-item-selected {
+  background-color: #fff;
+}
+.tabs-right {
+  width: calc(100% - 260px);
+}
+.tabs-left-item {
+  display: flex;
+  align-items: center;
+  height: 88px;
+  padding-left: 30px;
+  cursor: pointer;
+}
+.tabs-left-item > div {
+  margin-left: 15px;
+}
+.tabs-right-content {
+  padding: 60px 30px;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+.tabs-right-content-phone {
+  width: 240px;
+  height: 400px;
+  background-color: #fff;
+  padding: 24px 8px;
+  border-radius: 24px;
+  border: 1px solid #bababa;
+  margin: 0 82px 0 56px;
+}
+.tabs-right-content-phone > img {
+  width: 100%;
+  height: 100%;
+}
+.tabs-right-content-info div:nth-child(1) {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 40px;
+  color: #222;
+  margin-bottom: 8px;
+}
+.tabs-right-content-info div:nth-child(2) {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #222;
+  margin-bottom: 56px;
+  max-width: 446px;
+}
+.tabs-right-content-info div:nth-child(3) {
+  font-size: 14px;
+  line-height: 22px;
+  color: #666;
+}
+.banner-info > div:nth-child(1) {
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #222;
+}
+.banner-info > div:nth-child(2) {
+  font-size: 16px;
+  line-height: 24px;
+  color: #222;
+}
+.banner-info > div:nth-child(3) {
+  margin-top: 40px;
+}
+
+.swiper-container {
+  width: 1200px;
+  padding-bottom: 80px;
+}
+.swiper-slide {
+  background-size: 100% 100%;
+  width: 320px;
+  height: 500px;
+  border-radius: 10px;
+}
+
+.shadow {
+  position: absolute;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  text-align: center;
+  line-height: 500px;
+  color: #ffffff;
+  font-size: 30px;
+  display: none;
+  border-radius: 10px;
+  cursor: pointer;
+}

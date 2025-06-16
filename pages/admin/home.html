@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/assets/images/logoEn.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/layui.css">
+    <link rel="stylesheet" href="/assets/css/common.css">
+    <style>
+        .statistics {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .statistics .item div:nth-child(1) {
+            font-size: 16px;
+        }
+
+        .statistics .item div:nth-child(2) {
+            margin-top: 10px;
+        }
+
+        .statistics .item div:nth-child(3) {
+            margin-top: 10px;
+            display: inline-block;
+            background-color: #86cb25;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #fff;
+        }
+
+        #main {
+            width: 100%;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-content">
+        <div class="page-card line-btn">
+            <div class="cancel-btn" id="add-media-btn">
+                新建媒体
+            </div>
+            <div class="cancel-btn" id="add-adspace-btn">
+                新建广告位
+            </div>
+            <div class="cancel-btn" id="view-ad-data-btn">
+                查看广告数据
+            </div>
+        </div>
+        <div class="page-card">
+            <div class="page-title">
+                <div class="page-title-text">
+                    预估收入
+                    <i class="layui-icon layui-icon-about" lay-on="info-tips"></i>
+                </div>
+                <div>
+                    最新数据 2025年05月19日
+                </div>
+            </div>
+            <div class="statistics">
+                <div class="item">
+                    <div>
+                        昨日收入
+                    </div>
+                    <div>
+                        0元
+                    </div>
+                    <div>
+                        环比0%
+                    </div>
+                </div>
+                <div class="item">
+                    <div>
+                        过去7日收入
+                    </div>
+                    <div>
+                        0元
+                    </div>
+                    <div>
+                        环比0%
+                    </div>
+                </div>
+                <div class="item">
+                    <div>
+                        本月累计收入
+                    </div>
+                    <div>
+                        0元
+                    </div>
+                    <div>
+                        环比0%
+                    </div>
+                </div>
+                <div class="item">
+                    <div>
+                        本年累计收入
+                    </div>
+                    <div>
+                        0元
+                    </div>
+                    <div>
+                        环比0%
+                    </div>
+                </div>
+                <div class="item">
+                    <div>
+                        总收入
+                    </div>
+                    <div>
+                        0元
+                    </div>
+                    <div>
+                        环比0%
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-card">
+            <div id="main"></div>
+        </div>
+    </div>
+
+    <script src="/assets/js/layui.js"></script>
+    <script src="/assets/js/echarts.min.js"></script>
+    <script>
+        layui.config({
+            base: '/assets/js/modules/'
+        }).use(['layout'], function () {
+            var layout = layui.layout;
+            var util = layui.util;
+            var $ = layui.$;
+            layout({
+                activeIndex: 0,
+                user: {
+                    name: '用户名称',
+                    id: '用户id'
+                }
+            });
+            $('.layui-body').append($('.page-content').clone());
+            $('.page-content').css('display', 'block');
+            $('body > .page-content').remove();
+            util.on('lay-on', {
+                'info-tips': function () {
+                    layer.tips('您到目前为止累积的收入，以北京时间为准。这笔金额是预估值，可能会在每个月初确认您的收入时进行调整，以确保准确性。', this);
+                },
+            })
+            // 绑定按钮点击事件
+            $('#add-media-btn').on('click', function () {
+                window.location.href = '/pages/admin/media.html';
+            });
+
+            $('#add-adspace-btn').on('click', function () {
+                window.location.href = '/pages/admin/advplace.html';
+            });
+
+            $('#view-ad-data-btn').on('click', function () {
+                window.location.href = '/pages/admin/report.html';
+            });
+
+            // 图表配置
+            var chartDom = document.getElementById('main');
+            var myChart = echarts.init(chartDom);
+            var option;
+
+            option = {
+                title: {
+                    text: '预估收入'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: 'Email',
+                        type: 'line',
+                        stack: 'Total',
+                        data: [120, 132, 101, 134, 90, 230, 210]
+                    },
+                    {
+                        name: 'Union Ads',
+                        type: 'line',
+                        stack: 'Total',
+                        data: [220, 182, 191, 234, 290, 330, 310]
+                    },
+                    {
+                        name: 'Video Ads',
+                        type: 'line',
+                        stack: 'Total',
+                        data: [150, 232, 201, 154, 190, 330, 410]
+                    },
+                    {
+                        name: 'Direct',
+                        type: 'line',
+                        stack: 'Total',
+                        data: [320, 332, 301, 334, 390, 330, 320]
+                    },
+                    {
+                        name: 'Search Engine',
+                        type: 'line',
+                        stack: 'Total',
+                        data: [820, 932, 901, 934, 1290, 1330, 1320]
+                    }
+                ]
+            };
+
+            option && myChart.setOption(option);
+        });
+    </script>
+</body>
+
+</html>

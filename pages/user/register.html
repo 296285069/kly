@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>注册</title>
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/assets/images/logoEn.png" type="image/png">
+    <link href="/assets/css/layui.css" rel="stylesheet" />
+    <link href="/assets/css/common.css" rel="stylesheet" />
+    <link href="/assets/css/register.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="header-container"></div>
+
+    <!-- 主体内容 -->
+    <div class="register-main">
+        <form class="layui-form" autocomplete="off">
+            <div class="layui-form-item">
+                <label class="layui-form-label">注册邮箱</label>
+                <div class="layui-input-block">
+                    <input type="text" name="email" lay-verify="required|email" placeholder="请输入注册邮箱"
+                        class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-block">
+                    <input type="password" id="password" name="password" lay-verify="password" placeholder="请输入6-16位密码"
+                        class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label password-strength-label">密码强度</label>
+                <div class="layui-input-block password-strength">
+                    <div class="weak">弱</div>
+                    <div class="medium">中</div>
+                    <div class="strong">强</div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">确认密码</label>
+                <div class="layui-input-block">
+                    <input type="password" name="confirmPassword" placeholder="请再次输入密码" class="layui-input"
+                        lay-verify="confirmPassword">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">账户类型</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="type" value="0" title="个人" checked>
+                    <input type="radio" name="type" value="1" title="企业">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="name" lay-verify="required" placeholder="请输入名称" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">联系手机</label>
+                <div class="layui-input-block">
+                    <input type="text" name="name" lay-verify="required|phone" placeholder="请输入联系手机"
+                        class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">验证码</label>
+                <div class="layui-input-block">
+                    <div class="captcha-input-group">
+                        <input type="text" name="captcha" lay-verify="required|captcha" placeholder="请输入右侧验证码"
+                            class="layui-input captcha-input" maxlength="4">
+                        <div class="captcha-img-container">
+                            <div class="captcha-img" id="captchaImg">
+                                <canvas id="captchaCanvas" width="120" height="45"></canvas>
+                            </div>
+                            <span class="refresh-link" id="refreshCaptcha">看不清，换一张</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item agree">
+                <input type="checkbox" name="agree" lay-verify="agree">
+                <span>
+                    我已阅读并同意
+                    <a href="/pages/user/protocol.html" target="_blank">&lt;引力用户协议&gt;</a>
+                    <a href="https://www.gov.cn/xinwen/2015-04/25/content_2852914.htm"
+                        target="_blank">&lt;中华人民共和国广告法&gt;</a>
+                    <a href="https://www.gov.cn/xinwen/2015-04/25/content_2852914.htm"
+                        target="_blank">&lt;中华人民共和国网络安全法&gt;</a>
+                </span>
+            </div>
+            <div class="login-btn" lay-submit lay-filter="submit-login">
+                立即注册
+            </div>
+            <div class="register-login">
+                已有账号？ <span id="login">立即登录</span>
+            </div>
+        </form>
+    </div>
+
+
+    <div id="footer-container"></div>
+
+    <script src="/assets/js/components.js"></script>
+    <script src="/assets/js/layui.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script>
+        ComponentLoader.load('#header-container', '/pages/components/header.html').then(() => {
+            window.dispatchEvent(new CustomEvent('header-init', {
+                detail: { username: 'header入参' }
+            }));
+        });
+        ComponentLoader.load('#footer-container', '/pages/components/footer.html');
+
+        //JS
+        layui.use(["element", "layer", "util"], function () {
+            var element = layui.element;
+            var layer = layui.layer;
+            var util = layui.util;
+            var $ = layui.$;
+            var form = layui.form;
+            // 配置全局提示位置到顶部
+            layer.config({
+                offset: '20px'
+            });
+
+            // 获取密码强度元素
+            var $strengthElements = $('.password-strength > div');
+            // 获取密码和确认密码输入框
+            var $password = $('#password');
+            // 监听密码输入
+            $password.on('input', function () {
+                var password = $(this).val();
+                checkPasswordStrength(password, $strengthElements);
+            });
+
+            $('.agree span').on('click', function () {
+                // 获取关联的复选框
+                const $checkbox = $(this).prevAll('input[name="agree"]');
+                // 切换选中状态
+                $checkbox.prop('checked', !$checkbox.prop('checked'));
+
+                // 更新 Layui 的渲染状态
+                form.render('checkbox');
+            });
+
+            // 已有账号 立即登录
+            $('#login').on('click', function () {
+                window.dispatchEvent(new CustomEvent('header-login'))
+            })
+
+            // 自定义验证规则
+            form.verify({
+                // 验证密码，且为必填项
+                password: function (value, elem) {
+                    if (!/^[\S]{6,16}$/.test(value)) {
+                        return '密码必须为 6 到 16 位的非空字符';
+                    }
+                },
+                agree: function (value, elem) {
+                    if (!$(elem).prop('checked')) {
+                        return '请阅读并同意引力用户协议';
+                    }
+                },
+                confirmPassword: function (value, elem) {
+                    if (value !== $password.val()) {
+                        return '两次输入的密码不一致';
+                    }
+                },
+                // 验证码验证
+                captcha: function (value) {
+                    if (value.toLowerCase() !== currentCaptcha.toLowerCase()) {
+                        refreshCaptcha(); // 验证失败时刷新验证码
+                        return '验证码输入错误，请重新输入';
+                    }
+                }
+            });
+
+            // 表单提交
+            form.on('submit(submit-login)', function (data) {
+                var field = data.field;
+
+                console.log('field', field);
+
+                // 显示加载层
+                var loadIndex = layer.load(1, {
+                    shade: [0.3, '#000'], // 带30%透明度的黑色遮罩
+                    time: 0, // 不自动关闭
+                    offset: '130px'
+                });
+
+                // 模拟异步提交（实际使用时替换为ajax请求）
+                setTimeout(function () {
+                    // 关闭加载层
+                    layer.close(loadIndex);
+
+
+                    // 请求成功
+                    layer.msg('提交成功,即将跳转登录', { icon: 1, time: 2000 });
+
+                    // 注册成功 弹出登录框
+                    setTimeout(() => {
+                        window.dispatchEvent(new CustomEvent('header-login'))
+                    }, 2000)
+
+                }, 2000);
+
+                return false;
+            });
+
+
+            // 图形验证码功能
+            var currentCaptcha = '';
+
+            function refreshCaptcha() {
+                currentCaptcha = generateCaptcha('captchaCanvas');
+            }
+
+
+            // 初始化验证码
+            refreshCaptcha();
+
+            // 点击刷新验证码
+            $('#captchaImg, #refreshCaptcha').on('click', function () {
+                refreshCaptcha();
+            });
+        });
+    </script>
+</body>
+
+</html>

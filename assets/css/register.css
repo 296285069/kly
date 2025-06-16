@@ -1,0 +1,129 @@
+body {
+  background-color: #fff;
+}
+
+.register-main {
+  max-width: 580px;
+  margin: 100px auto;
+  min-height: calc(100vh - 360px);
+}
+
+.layui-form {
+  margin: 24px 32px 0;
+}
+
+.layui-input {
+  height: 48px;
+}
+
+.layui-form-label {
+  padding: 0;
+  line-height: 48px;
+}
+.password-strength-label {
+  line-height: 30px;
+}
+.password-strength {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 30px;
+}
+
+.password-strength > div {
+  line-height: 30px;
+  width: 100px;
+  background-color: #d8d8d8;
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.password-strength .weak.active {
+  background-color: #ff6b6b;
+}
+
+.password-strength .medium.active {
+  background-color: #ffce52;
+}
+
+.password-strength .strong.active {
+  background-color: #5fb878;
+}
+
+.agree {
+  margin-left: 110px;
+  line-height: 20px;
+  align-items: start;
+}
+.agree i {
+  margin-top: 2px;
+}
+.login-btn {
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  background-color: #1e9fff;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 110px;
+}
+
+.login-btn:hover {
+  opacity: 0.9;
+}
+
+.captcha-img-container {
+  margin-left: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.captcha-img {
+  width: 120px;
+  height: 45px;
+  background-color: #f5f7fa;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+
+.captcha-img canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.refresh-link {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #1e9fff;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.refresh-link:hover {
+  color: #0d8bf2;
+}
+
+.captcha-input-group {
+  display: flex;
+}
+
+.register-login {
+  text-align: right;
+  margin-top: 15px;
+}
+.register-login span {
+  color: #1e9fff;
+  cursor: pointer;
+}

@@ -1,0 +1,127 @@
+<link rel="stylesheet" href="/assets/css/layui.css">
+<link rel="stylesheet" href="/assets/css/common.css">
+<style>
+    body {
+        background-color: #fff;
+    }
+
+    .layui-form {
+        margin: 24px 32px 0;
+    }
+
+    .account-operation {
+        display: flex;
+        justify-content: space-between;
+        line-height: 48px;
+    }
+
+    .account-operation div {
+        cursor: pointer;
+        font-size: 12px;
+        color: #333;
+    }
+
+
+    .layui-input {
+        height: 48px;
+    }
+</style>
+<div>
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <input type="text" name="email" lay-verify="required|email" placeholder="邮箱登录" class="layui-input">
+        </div>
+        <div class="layui-form-item">
+            <input type="password" name="password" lay-verify="password" placeholder="密码" class="layui-input">
+        </div>
+        <div class="layui-form-item agree">
+            <input type="checkbox" name="agree" lay-verify="agree">
+            <span>
+                我已阅读并同意
+                <a href="/pages/user/protocol.html" target="_blank">引力用户协议</a>
+            </span>
+        </div>
+        <div class="account-operation">
+            <div id="retrievePwd">
+                忘记密码
+            </div>
+            <div id="register">
+                注册
+            </div>
+        </div>
+        <div class="login-btn" lay-submit lay-filter="submit-login">
+            立即登录
+        </div>
+    </form>
+</div>
+
+<script src="/assets/js/layui.js"></script>
+<script>
+    // 组件初始化逻辑
+    layui.use(function () {
+        var layout = layui.layout;
+        var $ = layui.$;
+        var form = layui.form;
+        $('.agree span').on('click', function () {
+            // 获取关联的复选框
+            const $checkbox = $(this).prevAll('input[name="agree"]');
+
+            // 切换选中状态
+            $checkbox.prop('checked', !$checkbox.prop('checked'));
+
+            // 更新 Layui 的渲染状态
+            form.render('checkbox');
+        });
+        // 自定义验证规则
+        form.verify({
+            // 验证密码，且为必填项
+            password: function (value, elem) {
+                if (!/^[\S]{6,16}$/.test(value)) {
+                    return '密码必须为 6 到 16 位的非空字符';
+                }
+            },
+            agree: function (value, elem) {
+                if (!$(elem).prop('checked')) {
+                    return '请阅读并同意引力用户协议';
+                }
+            },
+        });
+
+        // 忘记密码
+        $('#retrievePwd').on('click', function () {
+            // 关闭当前弹窗
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+            parent.window.location.href = '/pages/user/retrievePwd.html';
+        });
+
+        // 注册
+        $('#register').on('click', function () {
+            // 关闭当前弹窗
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+            parent.window.location.href = '/pages/user/register.html';
+        });
+
+        // 表单提交
+        form.on('submit(submit-login)', function (data) {
+            var field = data.field;
+
+            console.log('field', field);
+
+            // 模拟登录验证
+            if (true) {
+                // 关闭当前弹窗
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+
+                // 登录成功 跳转后台首页
+                parent.window.location.href = '/pages/admin/home.html';
+            } else {
+                layer.msg('登录失败，请检查账号密码');
+            }
+
+            return false;
+        });
+    });
+</script>

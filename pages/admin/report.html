@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>数据报表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/assets/images/logoEn.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/layui.css">
+    <link rel="stylesheet" href="/assets/css/common.css">
+    <link rel="stylesheet" href="/assets/css/formSelects-v4.css">
+    <style>
+        .layui-form-label {
+            min-width: 90px !important;
+            width: 90px !important;
+        }
+
+        .layui-input-block {
+            margin-left: 90px !important;
+        }
+
+        .layui-form-item {
+            margin-bottom: 0;
+        }
+
+        #main {
+            width: 100%;
+            height: 300px;
+        }
+
+        .statistics {
+            margin: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .statistics .item {
+            display: flex;
+            align-items: center;
+        }
+
+        .statistics .item>div:nth-child(2) {
+            margin-left: 15px;
+        }
+
+        .statistics .item>div:nth-child(2)>div:nth-child(1) {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .statistics .item>div:nth-child(2)>div:nth-child(2) {
+            color: #999;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-content">
+        <div class="page-card">
+            <div class="page-title">
+                <div class="page-title-text">
+                    数据报表
+                </div>
+            </div>
+            <div class="tips">
+                您的昨日数据报告在今日23：59（北京时间）前可能有部分没有纳入统计，我们将在未来2-3天内为您提供完整的数据报告，因为广告统计可能会有延时。请注意，所有的预估收益为近似值，并不代表
+                最终结果，最终确认的收益数字在您每个月结算信息中反映。如有疑问联系专属客户
+            </div>
+            <form class="layui-form layui-row layui-form-pane layui-col-space16" style="margin-top: 15px;"
+                autocomplete="off">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">日期</label>
+                        <div class="layui-input-block">
+                            <input name="date" type="text" class="layui-input" id="ID-datetime" placeholder=" - ">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">媒体</label>
+                        <div class="layui-input-block">
+                            <select name="quiz1" xm-select="selectId1">
+                                <option value="浙江">浙江省</option>
+                                <option value="江西">江西省</option>
+                                <option value="福建">福建省</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">广告位</label>
+                        <div class="layui-input-block">
+                            <select name="quiz2" xm-select="selectId2">
+                                <option value="">请选择</option>
+                                <option value="浙江">浙江省</option>
+                                <option value="江西">江西省</option>
+                                <option value="福建">福建省</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">展现形式</label>
+                        <div class="layui-input-block">
+                            <select name="quiz3" xm-select="selectId3">
+                                <option value="">请选择</option>
+                                <option value="浙江">浙江省</option>
+                                <option value="江西">江西省</option>
+                                <option value="福建">福建省</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-title">
+                    <div></div>
+                    <div class="line-btn">
+                        <div class="cancel-btn" id="reset-btn">
+                            重置
+                        </div>
+                        <div class="confirm-btn" lay-submit lay-filter="table-search">
+                            搜索
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="page-card">
+            <div class="page-title">
+                <div class="page-title-text">
+                    综合折线图
+                </div>
+            </div>
+            <div class="statistics">
+                <div class="item">
+                    <div>
+                        <img src="/assets/images/admin/data_icon01.png" alt="">
+                    </div>
+                    <div>
+                        <div>
+                            0
+                        </div>
+                        <div>
+                            曝光量
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div>
+                        <img src="/assets/images/admin/data_icon02.png" alt="">
+                    </div>
+                    <div>
+                        <div>
+                            0
+                        </div>
+                        <div>
+                            点击量
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div>
+                        <img src="/assets/images/admin/data_icon03.png" alt="">
+                    </div>
+                    <div>
+                        <div>
+                            0
+                        </div>
+                        <div>
+                            点击率
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div>
+                        <img src="/assets/images/admin/data_icon04.png" alt="">
+                    </div>
+                    <div>
+                        <div>
+                            0
+                        </div>
+                        <div>
+                            预估收入
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="main"></div>
+        </div>
+        <div class="page-card">
+            <div class="page-title" style="margin-bottom: 15px;">
+                <div class="page-title-text">
+                    明细数据
+                </div>
+                <div class="cancel-btn">
+                    下载数据报表
+                </div>
+            </div>
+            <table class="layui-hide" id="ID-table-data"></table>
+        </div>
+    </div>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/layui.js"></script>
+    <script src="/assets/js/echarts.min.js"></script>
+    <script src="/assets/js/formSelects-v4.min.js"></script>
+    <script>
+        layui.config({
+            base: '/assets/js/modules/'
+        }).use(['layout', 'form', 'formSelects'], function () {
+            var layout = layui.layout;
+            var $ = layui.$;
+            var form = layui.form;
+            var table = layui.table;
+            var laydate = layui.laydate;
+            var formSelects = layui.formSelects;
+
+            layout({
+                activeIndex: 3,
+                user: {
+                    name: '用户名称',
+                    id: '用户id',
+                }
+            });
+
+            $('.layui-body').append($('.page-content').clone());
+            $('.page-content').css('display', 'block');
+            $('body > .page-content').remove();
+
+            function formatDate(date) {
+                var year = date.getFullYear();
+                var month = (date.getMonth() + 1).toString().padStart(2, '0'); // 补零处理
+                var day = date.getDate().toString().padStart(2, '0'); // 补零处理
+                return `${year}-${month}-${day}`;
+            }
+
+            // 搜索提交
+            form.on('submit(table-search)', function (data) {
+                var field = data.field;
+                console.log('field', field);
+                return false;
+            });
+
+
+            // 日期初始化
+            function dateInit() {
+                laydate.render({
+                    elem: "#ID-datetime",
+                    type: "date",
+                    range: true,
+                    format: 'yyyy-MM-dd',
+                    shortcuts: [
+                        {
+                            text: "昨日",
+                            value: function () {
+                                var date = new Date();
+                                date.setDate(date.getDate() - 1);
+                                return [date, date];
+                            }
+                        },
+                        {
+                            text: "前日",
+                            value: function () {
+                                var date = new Date();
+                                date.setDate(date.getDate() - 2);
+                                return [date, date];
+                            }
+                        },
+                        {
+                            text: "最近七日",
+                            value: function () {
+                                var end = new Date();
+                                var start = new Date();
+                                start.setDate(end.getDate() - 6);
+                                return [start, end];
+                            }
+                        },
+                        {
+                            text: "本月",
+                            value: function () {
+                                var date = new Date();
+                                return [
+                                    new Date(date.getFullYear(), date.getMonth(), 1),
+                                    new Date(date.getFullYear(), date.getMonth() + 1, 0)
+                                ];
+                            }
+                        },
+                        {
+                            text: "上月",
+                            value: function () {
+                                var date = new Date();
+                                return [
+                                    new Date(date.getFullYear(), date.getMonth() - 1, 1),
+                                    new Date(date.getFullYear(), date.getMonth(), 0)
+                                ];
+                            }
+                        }
+                    ],
+                    value: initDateValue(),
+                    rangeLinked: true
+                });
+            }
+            // 提取日期范围生成函数
+            function getLast7Days() {
+                var end = new Date();
+                var start = new Date();
+                start.setDate(end.getDate() - 6);
+                return [start, end];
+            }
+            // 初始化日期范围
+            function initDateValue() {
+                var [start, end] = getLast7Days();
+                return formatDate(start) + ' - ' + formatDate(end);
+            }
+            // 自定义重置方法
+            $('#reset-btn').on('click', function () {
+
+                // 重置日期选择器
+                dateInit();
+
+                // 重置选择框
+                formSelects.value('selectId1', []);
+                formSelects.value('selectId2', []);
+                formSelects.value('selectId3', []);
+                inst.config.cols[0][1].hide = true;
+                inst.config.cols[0][2].hide = true;
+                inst.config.cols[0][3].hide = true;
+
+                inst.reload();
+                form.render();
+                return false;
+            });
+
+            // 已知数据渲染
+            var inst = table.render({
+                elem: '#ID-table-data',
+                cols: [[ //标题栏
+                    { field: 'id', title: '日期', },
+                    { field: 'username', title: '媒体', hide: true },
+                    { field: 'username', title: '广告位', hide: true },
+                    { field: 'username', title: '展现形式', hide: true },
+                    { field: 'username', title: '展现量', },
+                    { field: 'sign', title: '点击量', },
+                    { field: 'sex', title: '预计收益', },
+                    { field: 'sex', title: '点击率', },
+                    { field: 'sex', title: 'CPM', },
+                ]],
+                data: [{ // 赋值已知数据
+                    "id": "10001",
+                    "username": "张三1",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "116"
+                }, {
+                    "id": "10002",
+                    "username": "张三2",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "12",
+                }, {
+                    "id": "10003",
+                    "username": "张三3",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "65"
+                }, {
+                    "id": "10004",
+                    "username": "张三4",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "777"
+                }, {
+                    "id": "10005",
+                    "username": "张三5",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "86"
+                }, {
+                    "id": "10006",
+                    "username": "张三6",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "12"
+                }, {
+                    "id": "10007",
+                    "username": "张三7",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "16"
+                }, {
+                    "id": "10008",
+                    "username": "张三8",
+                    "sex": "男",
+                    "city": "浙江杭州",
+                    "sign": "人生恰似一场修行",
+                    "experience": "106"
+                }],
+                skin: 'line', // 表格风格
+                //even: true,
+                page: true,
+                done: function (res, curr, count) {
+                    // 分页回调，res是当前页的数据，curr是当前页码，count是数据总数
+                    console.log(res); // 打印当前页的数据
+                    console.log(curr); // 打印当前页码
+                    console.log(count); // 打印数据总数
+                },
+                limits: [5, 10, 15],
+                limit: 5 // 每页默认显示的数量
+            });
+
+            var chartDom = document.getElementById('main');
+            var myChart = echarts.init(chartDom);
+            var option;
+            option = {
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ['曝光量', '点击量', '点击率', '预估收入']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['曝光量', '点击量', '点击率', '预估收入']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '曝光量',
+                        type: 'line',
+                        stack: 'Total',
+                        data: [120, 132, 101, 134, 90, 230, 210]
+                    },
+                    {
+                        name: '点击量',
+                        type: 'line',
+                        stack: 'Total',
+                        data: [220, 182, 191, 234, 290, 330, 310]
+                    },
+                    {
+                        name: '点击率',
+                        type: 'line',
+                        stack: 'Total',
+                        data: [150, 232, 201, 154, 190, 330, 410]
+                    },
+                    {
+                        name: '预估收入',
+                        type: 'line',
+                        stack: 'Total',
+                        data: [320, 332, 301, 334, 390, 330, 320]
+                    },
+                ]
+            };
+
+            option && myChart.setOption(option);
+            dateInit();
+            formSelects.render();
+            // 绑定监听器
+            formSelects.on(function (id, vals, choice, isAdd, isDisabled) {
+                // id: 点击select的id
+                // vals: 当前select已选中的值
+                // choice: 当前select点击的值
+                // isAdd: 当前操作选中or取消
+                // isDisabled: 当前选项是否是disabled
+
+                // 定义一个变量用于存储最新的选择项
+                let currentVals = [...vals];
+                if (isAdd) {
+                    // 如果是选中操作，且当前选项未被禁用，则添加到选择项中
+                    if (!isDisabled) {
+                        currentVals.push(choice);
+                    }
+                } else {
+                    // 如果是取消操作，从选择项中移除当前选项
+                    currentVals = currentVals.filter(item => item.value !== choice.value);
+                }
+                // 打印最新的选择项
+                handleSelectionChange(id, currentVals);
+            });
+            // 定义需要防抖执行的函数
+            const handleSelectionChange = debounce(function (id, currentVals) {
+                switch (id) {
+                    case 'selectId1':
+                        // 媒体
+                        if (currentVals.length) {
+                            inst.config.cols[0][1].hide = false;
+                        } else {
+                            inst.config.cols[0][1].hide = true;
+                        }
+                        inst.reload();
+                        break;
+                    case 'selectId2':
+                        // 广告位
+                        if (currentVals.length) {
+                            inst.config.cols[0][2].hide = false;
+                        } else {
+                            inst.config.cols[0][2].hide = true;
+                        }
+                        inst.reload();
+                        break;
+                    case 'selectId3':
+                        // 展现形式
+                        if (currentVals.length) {
+                            inst.config.cols[0][3].hide = false;
+                        } else {
+                            inst.config.cols[0][3].hide = true;
+                        }
+                        inst.reload();
+                        break;
+                }
+
+                // 在这里执行你的逻辑
+            }, 100);
+
+
+            form.render();
+        });
+    </script>
+</body>
+
+</html>

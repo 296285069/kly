@@ -1,0 +1,217 @@
+/* 主题色  深#409eff 浅#a0dcff* background: rgba(160, 220, 255, 0.3);/
+/* 页面相关 */
+.page-main {
+  min-width: 1200px;
+  margin: 60px auto 0;
+}
+
+.admin-logo {
+  position: absolute;
+  width: 200px;
+  height: 100%;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.admin-logo img {
+  height: 32px;
+}
+
+.page-content {
+  display: none;
+  padding: 15px;
+}
+
+.left-menu-icon {
+  margin-right: 10px;
+}
+
+.page-card {
+  background-color: #fff;
+  padding: 15px;
+  margin-top: 15px;
+}
+.page-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.page-title-text {
+  font-size: 20px;
+  font-weight: bold;
+}
+.page-title-text button {
+  margin-left: 10px;
+}
+.tips {
+  padding: 15px 30px;
+  background: rgba(20, 115, 230, 0.1);
+  font-size: 12px;
+  margin-top: 15px;
+}
+.form-title {
+  background: rgba(160, 220, 255, 0.3);
+  color: #53565a;
+  display: inline-block;
+  width: calc(100% - 32px);
+  margin-left: 8px;
+  margin-bottom: 10px;
+}
+
+/* 按钮 */
+.line-btn {
+  display: flex;
+}
+.line-btn > div:not(:first-child) {
+  margin-left: 16px;
+}
+form .line-btn {
+  justify-content: center;
+}
+.confirm-btn,
+.cancel-btn {
+  cursor: pointer;
+  min-width: 100px;
+  border-radius: 4px;
+  line-height: 38px;
+  color: #fff;
+  text-align: center;
+  box-sizing: border-box;
+  border: 1px solid rgb(64, 158, 255);
+  background-color: rgb(64, 158, 255);
+  transition: 0.1s;
+  padding: 0 15px;
+}
+.cancel-btn {
+  background: #fff;
+  border: 1px solid #dcdfe6;
+  color: #606266;
+}
+.confirm-btn:hover {
+  color: rgb(255, 255, 255);
+  background: rgb(102, 177, 255);
+  border-color: rgb(102, 177, 255);
+}
+.cancel-btn:hover {
+  color: #409eff;
+  border-color: #c6e2ff;
+  background-color: #ecf5ff;
+}
+.round-btn {
+  min-width: 100px;
+  padding: 0 15px;
+  line-height: 45px;
+  border-radius: 22px;
+  background-color: #fff;
+  box-shadow: 0 6px 12px 0 rgba(40, 43, 49, 0.08);
+  color: #1971ff;
+  font-weight: 700;
+  font-size: 18px;
+  display: inline-block;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.round-btn:hover {
+  opacity: 0.8;
+}
+.login-btn {
+  text-align: center;
+  background: #409eff;
+  border-radius: 2px;
+  height: 48px;
+  line-height: 48px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.agree {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.agree .layui-form-checkbox {
+  margin: 0 !important;
+}
+
+.agree a {
+  color: #1890ff;
+  text-decoration: none;
+}
+
+.agree a:hover {
+  text-decoration: underline;
+}
+/* 框架样式调整 */
+body {
+  background-color: #f4f6f6;
+}
+.layui-table {
+  margin: 0;
+}
+
+.layui-table-page {
+  text-align: right;
+}
+
+.layui-layout-admin .layui-header {
+  background-color: #a0dcff;
+}
+.layui-side,
+.layui-nav {
+  background-color: #fff;
+}
+.layui-nav .layui-nav-item a,
+.layui-nav .layui-nav-item a:hover {
+  color: #53565a;
+}
+.layui-nav-tree .layui-nav-child dd.layui-this,
+.layui-nav-tree .layui-nav-child dd.layui-this a,
+.layui-nav-tree .layui-this,
+.layui-nav-tree .layui-this > a,
+.layui-nav-tree .layui-this > a:hover {
+  background-color: rgb(246, 249, 252);
+  color: rgb(0, 163, 224);
+}
+
+.layui-form-checked[lay-skin="primary"] > i {
+  border-color: #409eff !important;
+  background-color: #409eff;
+  color: #fff;
+}
+.layui-form-checkbox[lay-skin="primary"]:hover > i {
+  border-color: #409eff;
+}
+
+.layui-form-radio:hover > *,
+.layui-form-radioed,
+.layui-form-radioed > i {
+  color: #409eff;
+}
+/* 输入框聚焦 */
+.layui-input:focus,
+.layui-textarea:focus {
+  border-color: #a0dcff !important;
+  box-shadow: 0 0 0 3px rgba(22, 183, 119, 0.08);
+}
+/* 输入框校验 */
+.layui-form-danger + .layui-form-select .layui-input,
+.layui-form-danger:focus {
+  border-color: #ff5722 !important;
+  box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.08);
+}
+
+.layui-laypage .layui-laypage-curr .layui-laypage-em {
+  background-color: #409eff;
+}
+
+.layui-laypage a:hover {
+  color: #409eff;
+}
+
+.layui-form-select dl dd.layui-this {
+  color: #409eff;
+}

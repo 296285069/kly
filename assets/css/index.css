@@ -1,0 +1,160 @@
+body {
+  background-color: #fff;
+}
+.banner {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+}
+.video-1,
+.video-2 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+}
+.video-2 {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.banner-info {
+  position: absolute;
+  left: 10%;
+  bottom: 160px;
+  max-width: 550px;
+}
+.banner-info-title {
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 50px;
+  margin-bottom: 16px;
+}
+.banner-info-content {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.banner_footer--3NRiU {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 112px;
+  background: hsla(0, 0%, 100%, 0.5);
+  backdrop-filter: blur(20px);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner_footer_item--1wAsY {
+  width: 288px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-right: 16px;
+}
+
+.num_area--1G-ZO {
+  position: relative;
+  margin-bottom: 8px;
+}
+.num--HOI4l {
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 40px;
+  opacity: 1;
+}
+.title--3P7hz {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #666;
+  opacity: 1;
+}
+
+/* modal */
+.modal {
+  padding: 80px 0;
+}
+.modal-t1 {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 48px;
+  text-align: center;
+  color: #222;
+  margin-bottom: 16px;
+}
+.modal-t2 {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #666;
+}
+.modal-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-item {
+  display: flex;
+  width: 536px;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 32px;
+}
+.modal-item > img {
+  margin-right: 15px;
+  width: 66px;
+  height: 66px;
+}
+.modal-item-info {
+  width: calc(100% - 96px);
+}
+
+.modal-item-info div:nth-child(1) {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  color: #222;
+}
+.modal-item-info div:nth-child(2) {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  margin-top: 8px;
+  color: #666;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-all;
+}
+
+.join-us {
+  background: url(/assets/images/home/75353644d14b7dfc1f865330e2000fde.png)
+    no-repeat;
+  background-size: 100% 100%;
+  height: 190px;
+  text-align: center;
+  padding-top: 70px;
+}
+
+.join-us > div:nth-child(1) {
+  color: #fff;
+  line-height: 28px;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.round-btn {
+  margin-top: 40px;
+  width: 150px;
+}
