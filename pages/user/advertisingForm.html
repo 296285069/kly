@@ -13,6 +13,7 @@
     <link href="/assets/css/animate.min.css" rel="stylesheet">
     <link href="/assets/css/swiper.min.css" rel="stylesheet">
     <link href="/assets/css/advertisingForm.css" rel="stylesheet" />
+    <link href="/assets/css/libiao.css" rel="stylesheet" />
     <style>
         .shadow {
             display: block !important;
@@ -44,6 +45,52 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal-t1">安全高效的生态体系，免除后顾之忧</div>
+        <section class="main_box">
+            <div class="box">
+                <ul>
+                    <li class="on">
+                        <a href="#">
+                            <h3>游戏手机</h3>
+                            <p>王者荣耀版领卷减300</p>
+                            <img src="/assets/images/box/1.png" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <h3>游戏手机</h3>
+                            <p>王者荣耀版领卷减300</p>
+                            <img src="/assets/images/box/2.png" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <h3>游戏手机</h3>
+                            <p>王者荣耀版领卷减300</p>
+                            <img src="/assets/images/box/3.png" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <h3>游戏手机</h3>
+                            <p>王者荣耀版领卷减300</p>
+                            <img src="/assets/images/box/4.png" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <h3>游戏手机</h3>
+                            <p>王者荣耀版领卷减300</p>
+                            <img src="/assets/images/box/5.png" alt="">
+                        </a>
+                    </li>
+                    <div style="clear: both"></div>
+                </ul>
+            </div>
+        </section>
+
+        <div class="modal-t1">丰富学习资源，由点逐面进阶成长</div>
         <div class="swiper-container animated">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" style="background-image:url(/assets/images/advertisingForm/s1.jpg)">
@@ -72,6 +119,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
     <div id="footer-container"></div>
@@ -249,6 +297,11 @@
             // }).mouseleave(function () {
             //     $(this).find(".shadow").fadeOut()
             // })
+
+
+            $(".box ul li").hover(function () {
+                $(this).addClass('on').siblings().removeClass('on');
+            });
         });
     </script>
 </body>

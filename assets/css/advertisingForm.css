@@ -112,7 +112,7 @@
 
 .swiper-container {
   width: 1200px;
-  padding-bottom: 80px;
+  padding: 80px 0;
 }
 .swiper-slide {
   background-size: 100% 100%;
@@ -133,4 +133,19 @@
   display: none;
   border-radius: 10px;
   cursor: pointer;
+}
+.modal-t1 {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 48px;
+  text-align: center;
+  color: #222;
+  margin-bottom: 16px;
+}
+.modal-t2 {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #666;
 }
